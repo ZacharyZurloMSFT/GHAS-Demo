@@ -5,7 +5,7 @@ on:
       - master
 
 jobs:
-  sample:
+  msdo:
     name: Microsoft Security DevOps
 
     # MSDO runs on windows-latest.
