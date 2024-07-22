@@ -23,9 +23,7 @@ public class IndexController {
 
   @GetMapping("/")
   @ResponseBody
-  public List<Book> getBooks(@RequestParam(name = "name", required = false) String bookname,
-      @RequestParam(name = "author", required = false) String bookauthor,
-      @RequestParam(name = "read", required = false) Boolean bookread) {
+  public List<Book> getBooks() {
     List<Book> books = new ArrayList<Book>();
 
     Statement statement = null;
@@ -37,17 +35,6 @@ public class IndexController {
       statement = connection.createStatement();
       String query = "SELECT * FROM Books";
 
-      // if (bookname != null) {
-      //   // Filter by book name
-      //   query = "SELECT * FROM Books WHERE name LIKE '%" + bookname + "%'";
-      // } else if (bookauthor != null) {
-      //   // Filter by book author
-      //   query = "SELECT * FROM Books WHERE author LIKE '%" + bookauthor + "%'";
-      // } else if (bookread != null) {
-      //   // Filter by if the book has been read or not
-      //   Integer read = bookread ? 1 : 0;
-      //   query = "SELECT * FROM Books WHERE read = '" + read.toString() + "'";
-      // } 
       ResultSet results = statement.executeQuery(query);
 
       while (results.next()) {
@@ -71,5 +58,38 @@ public class IndexController {
       }
     }
     return books;
+  }
+
+  @GetMapping("/name")
+  public Book getBookByName(@RequestParam(name = "name", required = false) String bookname) {
+    Book book = null;
+
+    Statement statement = null;
+
+    try {
+      // Init connection to DB
+      connection = DriverManager.getConnection(Application.connectionString);
+
+      statement = connection.createStatement();
+      String query = "SELECT * FROM Books WHERE name = '" + bookname + "'";
+
+      ResultSet results = statement.executeQuery(query);
+
+      book = new Book(results.getString("name"), results.getString("author"), (results.getInt("read") == 1));
+    } catch (SQLException error) {
+      error.printStackTrace();
+    } finally {
+      try {
+        if (connection != null) {
+          connection.close();
+        }
+        if (statement != null) {
+          statement.close();
+        }
+      } catch (SQLException error) {
+        error.printStackTrace();
+      }
+    }
+    return book;
   }
 }
