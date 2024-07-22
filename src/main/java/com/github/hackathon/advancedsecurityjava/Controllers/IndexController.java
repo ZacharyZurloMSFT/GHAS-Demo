@@ -35,7 +35,6 @@ public class IndexController {
       statement = connection.createStatement();
       String query = "SELECT * FROM Books";
 
-
       ResultSet results = statement.executeQuery(query);
 
       while (results.next()) {
