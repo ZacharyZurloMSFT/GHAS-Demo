@@ -259,11 +259,3 @@ Notice that the security alert was found `In pull request` and not in the `main`
 </p>
 </details>
 
-
-## Next Steps
-
-Ready to talk about advanced security features for GitHub Enterprise? [Contact Sales](https://enterprise.github.com/contact) for more information!
-
-Check out [GitHub's Security feature page](https://github.com/features/security) for more security features embedded into GitHub.
-
-Check out the Code Scanning [documentation](https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) for additional configuration options and technical details.
