@@ -73,9 +73,9 @@ public class IndexController {
       statement = connection.createStatement();
       String query = "SELECT * FROM Books WHERE name = '" + bookname + "'";
 
-      ResultSet results = statement.executeQuery(query);
+      // ResultSet results = statement.executeQuery(query);
 
-      book = new Book(results.getString("name"), results.getString("author"), (results.getInt("read") == 1));
+      // book = new Book(results.getString("name"), results.getString("author"), (results.getInt("read") == 1));
     } catch (SQLException error) {
       error.printStackTrace();
     } finally {
